@@ -1,0 +1,39 @@
+.Menu_menuVertical {
+    background-color: #FFFFFF;
+    height: 99vh;
+    -webkit-box-shadow: 7px 7px 15px -10px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 7px 7px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 7px 7px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.Menu_borde {
+    border-left: 1px solid #3a3a3a;
+    height: 100%;
+}
+
+.Menu-menu:hover {
+    background-color: #6F00FF !important;
+    opacity: .8;
+}
+
+.Menu-menu:hover a {
+    background-color: #6F00FF !important;
+    opacity: .8;
+}
+
+.Menu_subMenu.active {
+    background-color: #6F00FF !important;
+    border-radius: 0;
+}
+
+.Menu-BgColor {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px 1px rgba(69, 65, 78, .08);
+}
+
+.Menu-ModalShadow {
+    -webkit-box-shadow: 7px 7px 15px -10px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 7px 7px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 7px 7px 15px -10px rgba(0, 0, 0, 0.75);
+}
