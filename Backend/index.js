@@ -15,7 +15,6 @@ app.use(express.json());
 const crudController = require('./controllers/crud/index')
 
 
-
 // ********************* R O U T I N G ********************* //
 app.get('/', (req, res) => res.status(200).send({ text: 'API is alive!' }));
 
