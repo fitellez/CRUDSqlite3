@@ -56,7 +56,6 @@ export class SendSms extends Component {
                 url: `${process.env.api}/api/person`,
                 data: body
             }).then((response) => {
-                console.log(response);
                 if (response.status == 200) {
                     $('#successAlert').show();
                     this.setState({ mensajeAlerta: 'Registro Agregado' });
@@ -104,7 +103,6 @@ export class SendSms extends Component {
                 url: `${process.env.api}/api/person/${idPersona}`,
                 data: body
             }).then((response) => {
-                console.log(response);
                 if (response.status == 200) {
                     $('#successAlert').show();
                     this.setState({ mensajeAlerta: 'Registro Actualizado' });
