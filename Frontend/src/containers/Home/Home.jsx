@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import $ from 'jquery';
+
 export class SendSms extends Component {
     constructor(props) {
         super(props);
