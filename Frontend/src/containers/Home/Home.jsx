@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import $ from 'jquery';
+import { db } from '../../Firebase/Firebase';
 
 export class SendSms extends Component {
     constructor(props) {
@@ -29,19 +30,28 @@ export class SendSms extends Component {
         });
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         $('#successAlert').hide();
-        try {
-            axios({
-                method: 'GET',
-                url: `${process.env.api}/api/person`
-            }).then((response) => {
-                this.setState({ Persona: response.data });
+        const persona = [];
+        let idPersona;
+        await db
+            .collection('Persona')
+            .get()
+            .then((response) => {
+                response.forEach(async (doc) => {
+                    idPersona = {
+                        ...doc.data(),
+                        id: doc.id
+                    };
+                    persona.push(idPersona);
+                });
+                this.setState({
+                    Persona: persona
+                });
             });
-        } catch (error) {}
     }
 
-    onCreate(e) {
+    async onCreate(e) {
         e.preventDefault();
         const { nombre, apellidos, direccion, telefono } = this.state;
         const body = {
@@ -50,89 +60,67 @@ export class SendSms extends Component {
             direccion,
             telefono
         };
-        try {
-            axios({
-                method: 'POST',
-                url: `${process.env.api}/api/person`,
-                data: body
-            }).then((response) => {
-                if (response.status == 200) {
-                    $('#successAlert').show();
-                    this.setState({ mensajeAlerta: 'Registro Agregado' });
-                    setTimeout(() => {
-                        $('#successAlert').hide();
-                        window.location.reload(false);
-                    }, 1500);
-                }
-            });
-        } catch (error) {}
-    }
-    onGetPersonByID(id) {
-        this.setState({ idPersona: id });
-        try {
-            axios({
-                method: 'GET',
-                url: `${process.env.api}/api/person/${id}`,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then((response) => {
-                this.setState({
-                    nombre: response.data.nombre,
-                    apellidos: response.data.apellidos,
-                    direccion: response.data.direccion,
-                    telefono: response.data.telefono
-                });
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    onUpdate(e) {
-        const { nombre, apellidos, direccion, telefono, idPersona } = this.state;
-        e.preventDefault();
-        const body = {
-            nombre,
-            apellidos,
-            direccion,
-            telefono
-        };
-        try {
-            axios({
-                method: 'put',
-                url: `${process.env.api}/api/person/${idPersona}`,
-                data: body
-            }).then((response) => {
-                if (response.status == 200) {
-                    $('#successAlert').show();
-                    this.setState({ mensajeAlerta: 'Registro Actualizado' });
-                    setTimeout(() => {
-                        $('#successAlert').hide();
-                        window.location.reload(false);
-                    }, 1500);
-                }
-            });
-        } catch (error) {}
-    }
-    onDelete(e){
-      e.preventDefault();
-      const { idPersona } = this.state;
-      try {
-        axios({
-            method: 'delete',
-            url: `${process.env.api}/api/person/${idPersona}`,
-        }).then((response) => {
-            console.log(response);
-            if (response.status == 200) {
+
+        await db
+            .collection('Persona')
+            .doc()
+            .set(body)
+            .then((response) => {
                 $('#successAlert').show();
-                this.setState({ mensajeAlerta: 'Registro Eliminado' });
+                this.setState({ mensajeAlerta: 'Registro Agregado' });
                 setTimeout(() => {
                     $('#successAlert').hide();
                     window.location.reload(false);
                 }, 1500);
-            }
-        });
-    } catch (error) {}
+            });
+    }
+    async onGetPersonByID(id) {
+        this.setState({ idPersona: id });
+        await db
+            .collection(`Persona`)
+            .doc(id)
+            .get()
+            .then((response) => {
+                this.setState({
+                    nombre: response.data().nombre,
+                    apellidos: response.data().apellidos,
+                    direccion: response.data().direccion,
+                    telefono: response.data().telefono
+                });
+            });
+    }
+    async onUpdate(e) {
+        const { nombre, apellidos, direccion, telefono, idPersona } = this.state;
+        e.preventDefault();
+        await db
+            .collection(`Persona`)
+            .doc(idPersona)
+            .update({
+                nombre: nombre,
+                apellidos: apellidos,
+                direccion: direccion,
+                telefono: telefono
+            })
+            .then((response)  =>{
+                $('#successAlert').show();
+                this.setState({ mensajeAlerta: 'Registro Actualizado' });
+                setTimeout(() => {
+                    $('#successAlert').hide();
+                    window.location.reload(false);
+                }, 1500);
+            });
+    }
+    async onDelete(e) {
+        e.preventDefault();
+        const { idPersona } = this.state;
+        await db.collection(`Persona`).doc(idPersona).delete().then((response)  =>{
+          $('#successAlert').show();
+          this.setState({ mensajeAlerta: 'Registro Eliminado' });
+          setTimeout(() => {
+              $('#successAlert').hide();
+              window.location.reload(false);
+          }, 1500);
+      });;
     }
 
     render() {
@@ -206,10 +194,10 @@ export class SendSms extends Component {
                                                                 data-target='#EliminarPersona'
                                                                 onClick={() => this.setState({ idPersona: item.id })}
                                                             >
-                                                               <FontAwesomeIcon
-                                                                icon={faUserTimes}
-                                                                className='text-white ml-1'
-                                                            />
+                                                                <FontAwesomeIcon
+                                                                    icon={faUserTimes}
+                                                                    className='text-white ml-1'
+                                                                />
                                                             </button>
                                                         </div>
                                                     </td>
@@ -418,9 +406,9 @@ export class SendSms extends Component {
                             <form className='Categoria-form' onSubmit={this.onDelete}>
                                 <div className='modal-footer'>
                                     <div className='row text-center'>
-                                      <div className='col-12'>
-                                      <p>¿Está seguro que desea eliminar esta Persona?</p>
-                                      </div >
+                                        <div className='col-12'>
+                                            <p>¿Está seguro que desea eliminar esta Persona?</p>
+                                        </div>
                                         <div className='col-12'>
                                             <button type='submit' className='btn btn-danger px-5 py-2 mt-1'>
                                                 Eliminar

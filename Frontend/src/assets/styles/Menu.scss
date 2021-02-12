@@ -11,19 +11,31 @@
     height: 100%;
 }
 
+.Menu-menu {
+    background-color: #FFFFFF !important;
+    color: #6F00FF !important;
+    border: #6F00FF solid 1px;
+    border-radius: 15px;
+}
+
 .Menu-menu:hover {
     background-color: #6F00FF !important;
     opacity: .8;
+    border-radius: 15px;
+    color: #FFFFFF !important;
 }
 
 .Menu-menu:hover a {
     background-color: #6F00FF !important;
     opacity: .8;
+    border-radius: 15px;
+    color: #FFFFFF !important;
 }
 
 .Menu_subMenu.active {
     background-color: #6F00FF !important;
-    border-radius: 0;
+    border-radius: 15px;
+    color: #FFFFFF !important;
 }
 
 .Menu-BgColor {

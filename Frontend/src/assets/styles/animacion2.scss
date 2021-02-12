@@ -1,0 +1,227 @@
+// @import "compass/css3";
+@import url(https://fonts.googleapis.com/css?family=Finger+Paint);
+.anim2-text {
+    font-size: 2rem;
+}
+
+span {
+    display: inline-block;
+    text-shadow: 0 0 0 whitesmoke;
+    animation: smoky 5s 3s both;
+}
+
+span:nth-child(even) {
+    animation-name: smoky-mirror;
+}
+
+@keyframes smoky {
+    60% {
+        text-shadow: 0 0 40px whitesmoke;
+    }
+    to {
+        transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
+        text-shadow: 0 0 20px whitesmoke;
+        opacity: 0;
+    }
+}
+
+@keyframes smoky-mirror {
+    60% {
+        text-shadow: 0 0 40px whitesmoke;
+    }
+    to {
+        transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
+        text-shadow: 0 0 20px whitesmoke;
+        opacity: 0;
+    }
+}
+
+@for $item from 1 through 21 {
+    span:nth-of-type(#{$item}) {
+        animation-delay: #{(3 + ($item/5))}s;
+    }
+}
+
+//////////////////////
+#square {
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 200px;
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    animation: rotate1 5s;
+    -webkit-animation: rotate1 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square2 {
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 50px;
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    animation: rotate1 5s;
+    -webkit-animation: rotate1 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square3 {
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 50px;
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    animation: rotate1 5s;
+    -webkit-animation: rotate1 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square8 {
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 350px;
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    animation: rotate1 5s;
+    -webkit-animation: rotate1 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square9 {
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 350px;
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    animation: rotate1 5s;
+    -webkit-animation: rotate1 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes rotate1 {
+    from {
+        -webkit-transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+        -webkit-transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+@keyframes rotate1 {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+
+/*MARROON */
+
+#square4 {
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 50px;
+    width: 150px;
+    height: 150px;
+    background: LightCoral;
+    animation: rotate2 5s;
+    -webkit-animation: rotate2 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square5 {
+    position: absolute;
+    margin-left: 100px;
+    margin-top: 200px;
+    width: 150px;
+    height: 150px;
+    background: LightCoral;
+    animation: rotate2 5s;
+    -webkit-animation: rotate2 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square6 {
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 200px;
+    width: 150px;
+    height: 150px;
+    background: LightCoral;
+    animation: rotate2 5s;
+    -webkit-animation: rotate2 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+#square7 {
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 350px;
+    width: 150px;
+    height: 150px;
+    background: LightCoral;
+    animation: rotate2 5s;
+    -webkit-animation: rotate2 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes rotate2 {
+    from {
+        -webkit-transform: rotateY(0deg) rotateX(360deg);
+    }
+    to {
+        -webkit-transform: rotateY(360deg) rotateX(0deg);
+    }
+}
+
+@keyframes rotate2 {
+    from {
+        transform: rotateY(0deg) rotateX(360deg);
+    }
+    to {
+        transform: rotateY(360deg) rotateX(0deg);
+    }
+}
